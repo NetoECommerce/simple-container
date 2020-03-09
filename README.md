@@ -9,7 +9,7 @@ Consider using PHP-DI or Symfony DI for a more complete implementation.
 Via Composer
 
 ``` bash
-$ composer require league/container
+$ composer require composer require netolabs/simple-container
 ```
 
 ## Requirements
