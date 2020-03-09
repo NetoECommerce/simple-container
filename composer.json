@@ -35,7 +35,11 @@
     },
     "scripts": {
         "test": [
-            "phpunit"
+            "phpunit --testdox"
+        ],
+        "lint": [
+            "phpmd src text cleancode,codesize,controversial,design,naming,unusedcode",
+            "phpcs --standard=PSR2 src"
         ]
     }
 }

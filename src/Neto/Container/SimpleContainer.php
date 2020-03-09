@@ -13,7 +13,7 @@ use Psr\Container\NotFoundExceptionInterface;
  * It's not intended to do fancy DI, just the absolute bare minimum.
  * Consider using PHP-DI or Symfony DI for a more complete implementation.
  *
- * @package Neto\Lambda\Container
+ * @package Neto\Container
  */
 class SimpleContainer implements ContainerInterface
 {
