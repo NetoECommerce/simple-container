@@ -15,7 +15,7 @@ class SimpleContainerTest extends TestCase
 
         $this->assertFalse($container->has('definition'));
 
-        $container->add('definition', 'value');
+        $container->set('definition', 'value');
 
         $this->assertTrue($container->has('definition'));
     }
@@ -23,7 +23,7 @@ class SimpleContainerTest extends TestCase
     public function testContainerCanAddAndGetDefinition()
     {
         $container = new SimpleContainer();
-        $container->add('definition', 'value');
+        $container->set('definition', 'value');
 
         $this->assertEquals('value', $container->get('definition'));
     }
@@ -33,6 +33,6 @@ class SimpleContainerTest extends TestCase
         $this->expectException(NotFoundException::class);
 
         $container = new SimpleContainer();
-        $container->get('non-existant-definition');
+        $container->get('non-existent-definition');
     }
 }

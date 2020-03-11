@@ -1,0 +1,20 @@
+<?php declare(strict_types=1);
+
+namespace Neto\Container\Test;
+
+use Neto\Container\ContainerAwareTrait;
+use Phake;
+use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
+
+class ContainerAwareTest extends TestCase
+{
+    public function testTraitGetsAndSetsContainer()
+    {
+        $trait = $this->getMockForTrait(ContainerAwareTrait::class);
+        $container = Phake::mock(ContainerInterface::class);
+
+        $trait->setContainer($container);
+        $this->assertSame($container, $trait->getContainer());
+    }
+}

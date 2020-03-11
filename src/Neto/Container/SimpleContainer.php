@@ -28,7 +28,7 @@ class SimpleContainer implements ContainerInterface
      *
      * @return void
      */
-    public function add($identifier, $value)
+    public function set($identifier, $value)
     {
         $this->container[$identifier] = $value;
     }
