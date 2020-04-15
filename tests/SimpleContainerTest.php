@@ -2,37 +2,57 @@
 
 namespace Neto\Container\Test;
 
+use Neto\Container\ContainerException;
 use Neto\Container\NotFoundException;
 use Neto\Container\SimpleContainer;
 use PHPUnit\Framework\TestCase;
 
-class SimpleContainerTest extends TestCase
+final class SimpleContainerTest extends TestCase
 {
+    protected $container;
+
+    public function setUp()
+    {
+        $this->container = new SimpleContainer();
+    }
 
     public function testContainerCanCheckForDefinition()
     {
-        $container = new SimpleContainer();
+        $this->assertFalse($this->container->has('definition'));
 
-        $this->assertFalse($container->has('definition'));
+        $this->container->set('definition', 'value');
 
-        $container->set('definition', 'value');
-
-        $this->assertTrue($container->has('definition'));
+        $this->assertTrue($this->container->has('definition'));
     }
 
     public function testContainerCanAddAndGetDefinition()
     {
-        $container = new SimpleContainer();
-        $container->set('definition', 'value');
+        $this->container->set('definition', 'value');
 
-        $this->assertEquals('value', $container->get('definition'));
+        $this->assertEquals('value', $this->container->get('definition'));
     }
 
     public function testContainerThrowsWhenDefinitionIsNotFound()
     {
         $this->expectException(NotFoundException::class);
 
-        $container = new SimpleContainer();
-        $container->get('non-existent-definition');
+        $this->container->get('non-existent-definition');
+    }
+
+    public function testContainerCanResolveDefinition()
+    {
+        $this->container->set('callable', function () {
+            return 'foo';
+        });
+
+        $this->assertEquals('foo', $this->container->resolve('callable'));
+    }
+
+    public function testContainerThrowsWhenResolvingNonCallable()
+    {
+        $this->expectException(ContainerException::class);
+
+        $this->container->set('callable', 'not a callable value');
+        $this->container->resolve('callable');
     }
 }

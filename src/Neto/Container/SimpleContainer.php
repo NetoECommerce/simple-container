@@ -45,11 +45,36 @@ class SimpleContainer implements ContainerInterface
      */
     public function get($identifier)
     {
-        if ($this->has($identifier)) {
-            return $this->container[$identifier];
+        if (!$this->has($identifier)) {
+            throw new NotFoundException(sprintf('Could not find container definition for %s', $identifier));
         }
 
-        throw new NotFoundException(sprintf('Could not find container definition for %s', $identifier));
+        if (is_callable($this->container[$identifier])) {
+            $this->container[$identifier] = $this->resolve($identifier);
+        }
+
+        return $this->container[$identifier];
+    }
+
+    /**
+     * @param string $identifier Identifier to resolve.
+     *
+     * @throws NotFoundExceptionInterface  No entry was found for this identifier.
+     * @throws ContainerExceptionInterface Container value is not a callable.
+     *
+     * @return mixed Value of the invoked callable
+     */
+    public function resolve($identifier)
+    {
+        if (!$this->has($identifier)) {
+            throw new NotFoundException(sprintf('Could not find container definition for %s', $identifier));
+        }
+
+        if (!is_callable($this->container[$identifier])) {
+            throw new ContainerException(sprintf('Cannot resolve non-callable definition %s', $identifier));
+        }
+
+        return call_user_func($this->container[$identifier]);
     }
 
     /**

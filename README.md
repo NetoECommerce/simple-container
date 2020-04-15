@@ -24,7 +24,7 @@ PHP version 7.3 and up is required.
 $container = new SimpleContiner();
 $service = new MySuperCoolService();
 
-$container->add(MySuperCoolService::class, $service);
+$container->set(MySuperCoolService::class, $service);
 ```
 
 ### Fetching from the container
@@ -34,6 +34,32 @@ if ($container->has(MySuperCoolService::class) {
     $service = $container->get(MySuperCoolService::class);
 }
 ```
+
+### Adding a callable definition
+
+Here we are adding an anonymous function which will be invoked the first time the definition is accessed via `set()`.
+The computed value will be cached for subsequent accesses.
+
+``` php
+$container = new SimpleContiner();
+
+$container->set('myCallable', function() {
+    return 'a computed value';
+});
+
+$value = $container->get('myCallable');
+// value is 'a computed value'
+```
+
+### Invoking the callable for every access
+
+If you require the callable to be invoked every time you access the definition, you can use the `resolve()` method instead.
+
+``` php
+$value = $container->resolve('myCallable');
+// value is 'a computed value'
+```
+
 
 ## License
 
