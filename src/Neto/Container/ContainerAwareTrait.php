@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 
 trait ContainerAwareTrait
 {
-    /** @var ContainerInterface */
+    /** @var ContainerInterface|null */
     private $container;
 
     /**
@@ -22,9 +22,9 @@ trait ContainerAwareTrait
     }
 
     /**
-     * @return ContainerInterface
+     * @return ContainerInterface|null
      */
-    public function getContainer(): ContainerInterface
+    public function getContainer(): ?ContainerInterface
     {
         return $this->container;
     }

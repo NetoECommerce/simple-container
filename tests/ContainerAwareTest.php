@@ -17,4 +17,10 @@ class ContainerAwareTest extends TestCase
         $trait->setContainer($container);
         $this->assertSame($container, $trait->getContainer());
     }
+
+    public function testTraitCanGetNullContainer()
+    {
+        $trait = $this->getMockForTrait(ContainerAwareTrait::class);
+        $this->assertNull($trait->getContainer());
+    }
 }
