@@ -24,7 +24,7 @@ interface ContainerAwareInterface
     /**
      * Gets the container property.
      *
-     * @return ContainerInterface
+     * @return ContainerInterface|null
      */
-    public function getContainer(): ContainerInterface;
+    public function getContainer(): ?ContainerInterface;
 }
