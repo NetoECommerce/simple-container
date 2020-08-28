@@ -7,7 +7,7 @@ use Phake;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-class ContainerAwareTest extends TestCase
+final class ContainerAwareTest extends TestCase
 {
     public function testTraitGetsAndSetsContainer()
     {

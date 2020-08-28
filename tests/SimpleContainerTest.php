@@ -11,7 +11,7 @@ final class SimpleContainerTest extends TestCase
 {
     protected $container;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->container = new SimpleContainer();
     }
