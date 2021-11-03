@@ -21,7 +21,7 @@ PHP version 7.3 and up is required.
 ### Adding a definition to the container
 
 ``` php
-$container = new SimpleContiner();
+$container = new SimpleContainer();
 $service = new MySuperCoolService();
 
 $container->set(MySuperCoolService::class, $service);
@@ -41,7 +41,7 @@ Here we are adding an anonymous function which will be invoked the first time th
 The computed value will be cached for subsequent accesses.
 
 ``` php
-$container = new SimpleContiner();
+$container = new SimpleContainer();
 
 $container->set('myCallable', function() {
     return 'a computed value';
